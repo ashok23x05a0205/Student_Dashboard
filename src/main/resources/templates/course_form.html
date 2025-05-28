@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${course.id == null} ? 'Add Course' : 'Edit Course'">Course Form</title>
+    <style>
+        /* Use a gentle, light abstract or blurred background image */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 40px 20px;
+            color: #333;
+        }
+        /* Add a semi-transparent overlay so form stands out */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: -1;
+        }
+        h2 {
+            text-align: center;
+            color: #34495e;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        form {
+            background: white;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 8px;
+            border: 1.5px solid #bdc3c7;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+        }
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        button {
+            margin-top: 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        a {
+            display: inline-block;
+            margin-left: 15px;
+            margin-top: 28px;
+            color: #7f8c8d;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #34495e;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h2 th:text="${course.id == null} ? 'Add Course' : 'Edit Course'"></h2>
+
+<form th:action="@{${course.id == null} ? '/studentPages/courses/add' : '/studentPages/courses/edit/' + ${course.id}}" th:object="${course}" method="post">
+    <label>Course Name:</label><br/>
+    <input type="text" th:field="*{courseName}" required /><br/><br/>
+
+    <label>Description:</label><br/>
+    <textarea th:field="*{description}"></textarea><br/><br/>
+
+    <button type="submit">Save</button>
+    <a href="/studentPages/courses">Cancel</a>
+</form>
+
+</body>
+</html>

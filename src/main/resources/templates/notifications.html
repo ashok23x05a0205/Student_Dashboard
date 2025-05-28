@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9fafb;
+            color: #333;
+            margin: 40px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        .top-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .top-buttons a {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            box-shadow: 0 3px 7px rgba(52, 152, 219, 0.4);
+            transition: background-color 0.3s ease;
+        }
+
+        .top-buttons a:hover {
+            background-color: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f8ff;
+        }
+
+        a.action-link {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        a.action-link:hover {
+            text-decoration: underline;
+            color: #1c5980;
+        }
+
+    </style>
+</head>
+<body>
+
+<h2>All Notifications</h2>
+
+<div class="top-buttons">
+    <a th:href="@{/notifications/form}">Add New Notification</a>
+    <a th:href="@{/dashboard}">Back to Dashboard</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Message</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="n : ${notifications}">
+            <td th:text="${n.id}"></td>
+            <td th:text="${n.message}"></td>
+            <td th:text="${n.date}"></td>
+            <td>
+                <a th:href="@{'/notifications/form?id=' + ${n.id}}" class="action-link">Edit</a> |
+                <a th:href="@{'/notifications/delete?id=' + ${n.id}}" onclick="return confirm('Delete this?')" class="action-link">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

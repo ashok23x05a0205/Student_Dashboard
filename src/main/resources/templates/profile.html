@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+    <style>
+        /* Background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Container */
+        .form-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            max-width: 450px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        /* Heading */
+        h2 {
+            margin-bottom: 25px;
+            color: #333;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+
+        /* Labels */
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #555;
+            text-align: left;
+        }
+
+        /* Inputs */
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-top: 6px;
+            border: 1.8px solid #ddd;
+            border-radius: 7px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Buttons container */
+        .btn-group {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        /* Buttons */
+        button, a.btn {
+            flex: 1;
+            padding: 12px 0;
+            font-weight: 600;
+            border-radius: 7px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            border: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        /* Save button */
+        button {
+            background-color: #007bff;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Delete button */
+        a.btn-danger {
+            background-color: #dc3545;
+        }
+        a.btn-danger:hover {
+            background-color: #a71d2a;
+        }
+
+        /* Back to dashboard button */
+        a.btn-back {
+            background-color: #6c757d;
+        }
+        a.btn-back:hover {
+            background-color: #495057;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Edit Profile</h2>
+        <form th:action="@{/studentPages/edit-profile}" method="post" th:object="${student}">
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" required />
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required />
+
+            <div class="btn-group">
+                <button type="submit">Save Changes</button>
+                <a href="/studentPages/delete-profile" 
+                   onclick="return confirm('Are you sure you want to delete your profile?');" 
+                   class="btn btn-danger">Delete Profile</a>
+            </div>
+        </form>
+
+        <a href="/dashboard" class="btn btn-back" style="margin-top: 20px; display: inline-block;">&#8592; Back to Dashboard</a>
+    </div>
+</body>
+</html>
